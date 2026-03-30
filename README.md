@@ -4,7 +4,7 @@ This repository contains the laboratory assignments for the Master's program at 
 
 ## Author Information
 * **Name:** Abramian Edgar
-* **Group:** 6133-010402D
+* **Group:** 6133-010402
 
 ---
 
@@ -12,4 +12,12 @@ This repository contains the laboratory assignments for the Master's program at 
 To maintain a clean and organized workspace, this project follows a branch-per-assignment strategy:
 
 * **Main Branch:** Contains general documentation and shared project configurations.
-* **Lab Branches:** Each laboratory work is isolated in its own dedicated branch (e.g., `lab-1`, `lab-2`, etc.).
+* **Lab Branches:** Each laboratory work is isolated in its own dedicated branch.
+
+### List of Laboratory Works
+| # | Assignment Name | Branch | Status |
+|---|-----------------|--------|--------|
+| 0 | MatMul | `lab-0` | Completed |
+| 1 | VectorSum | `lab-1` | In Progress |
+
+---
