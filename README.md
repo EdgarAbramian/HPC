@@ -18,6 +18,6 @@ To maintain a clean and organized workspace, this project follows a branch-per-a
 | # | Assignment Name | Branch | Status |
 |---|-----------------|--------|--------|
 | 0 | MatMul | `lab-0` | Completed |
-| 1 | VectorSum | `lab-1` | In Progress |
-
+| 1 | VectorSum | `lab-1` | Completed |
+| 2 | Harris | `lab-2` | In Progress |
 ---
