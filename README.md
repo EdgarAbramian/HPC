@@ -1,24 +1,20 @@
-# HPC Laboratory Works
+## Lab 3: Bilinear Interpolation
+Performance comparison for upscaling a 4K image (3840x2160) to 8K (7680x4320) using hardware-accelerated interpolation.
 
-This repository contains the laboratory assignments for the Master's program at **Samara National Research University**.
+### Methodology
+* **CPU**: Sequential bilinear interpolation calculating weights manually with boundary wrapping.
+* **GPU**: Hardware-accelerated interpolation using **CUDA Texture Units** (`cudaFilterModeLinear`). Edge wrapping is handled by `cudaAddressModeWrap`.
 
-## Author Information
-* **Name:** Abramian Edgar
-* **Group:** 6133-010402
+### Results
+| Implementation | Execution Time (ms) | Speedup |
+| :--- | :--- | :--- |
+| CPU (Sequential) | 2163.00 | 1.00x |
+| GPU (CUDA Hardware) | 0.82 | **~2637x** |
 
----
+**Accuracy Analysis:**
+* **Mismatches:** 18,786 pixels.
+* **Explanation:** Discrepancies are within the expected tolerance. They occur due to the difference between GPU hardware fixed-point interpolation and CPU software floating-point calculations.
 
-## Repository Structure
-To maintain a clean and organized workspace, this project follows a branch-per-assignment strategy:
-
-* **Main Branch:** Contains general documentation and shared project configurations.
-* **Lab Branches:** Each laboratory work is isolated in its own dedicated branch.
-
-### List of Laboratory Works
-| # | Assignment Name | Branch | Status |
-|---|-----------------|--------|--------|
-| 0 | MatMul | `lab-0` | Completed |
-| 1 | VectorSum | `lab-1` | Completed |
-| 2 | Harris | `lab-2` | Completed |
-| 3 | BilinearInterp | `lab-3` | In Progress |
----
+### Visual Verification
+* **Input Image**: `img/test.pgm` (3840x2160)
+* **Upscaled Image**: `img/out_bilinear.pgm` (7680x4320)
