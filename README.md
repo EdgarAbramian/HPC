@@ -1,25 +1,26 @@
-# Lab 1: Vector Sum
+# Harris Corner Detector
 
-A simple performance comparison between sequential CPU summation and parallel GPU reduction using CUDA.
+A performance comparison between sequential CPU and parallel GPU implementations of the Harris Corner Detector using CUDA.
 
 ## Methodology
-* **CPU:** A single-thread `for` loop over a dynamic array.
-* **GPU:** Parallel reduction using **Shared Memory**. The array is divided into blocks (256 threads each) to calculate partial sums, followed by an `atomicAdd` for the final result. This minimizes global memory bottlenecks.
+* **CPU:** Sequential implementation using Sobel operators for gradient calculation, Gaussian weighting for integration, and Non-Maximum Suppression (NMS).
+* **GPU:** Parallelized using two optimized CUDA kernels:
+    * **Response Kernel:** Utilizes **Texture Memory** (CUDA Texture Objects) for efficient 2D spatial data access during gradient and response calculations.
+    * **NMS Kernel:** Parallelized Non-Maximum Suppression to isolate corner peaks above a threshold.
 
 ## Results
-Tests performed on a Google Colab T4 GPU.
+Performance benchmarked using the provided `img/test.pgm` image.
 
-| Array Size | CPU Time (ms) | GPU Time (ms) | Speedup |
-| :--- | :--- | :--- | :--- |
-| 1,000 | 0.0032 | 0.1802 | 0.02x |
-| 10,000 | 0.0302 | 0.0146 | 2.06x |
-| 50,000 | 0.1526 | 0.0307 | 4.97x |
-| 100,000 | 0.3171 | 0.0207 | 15.34x |
-| 500,000 | 1.4502 | 0.0519 | 27.92x |
-| 1,000,000 | 3.1918 | 0.0942 | 33.89x |
+| Implementation | Execution Time (ms) | Speedup |
+| :--- | :--- | :--- |
+| CPU (Sequential) | 1144.00 | 1.00x |
+| GPU (CUDA) | 94.78 | 12.07x |
 
+**Accuracy:** 
+* **Mismatches:** 0 
+* Results are bit-perfect compared to the CPU reference implementation.
 
-
-## Key Findings
-1.  **Overhead:** For small datasets ($N < 10^4$), the CPU wins because GPU kernel invocation and memory transfer costs too much raher than the calculation time.
-2.  **Scalability:** As the workload increases, the GPU's massive parallelism takes over, achieving a **~34x speedup** at 1 million elements.
+## Key Highlights
+1.  **Memory Optimization:** Leveraging Texture Units provides hardware-accelerated caching for spatial locality, which is ideal for stencil-like operations (Sobel/Gaussian).
+2.  **Scalability:** The GPU implementation provides a significant **~12x speedup**, making it suitable for real-time image processing tasks.
+3.  **Correctness:** Zero mismatches between CPU and GPU verify the reliability of the parallelized logic.
