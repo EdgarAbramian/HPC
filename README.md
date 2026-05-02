@@ -20,5 +20,6 @@ To maintain a clean and organized workspace, this project follows a branch-per-a
 | 0 | MatMul | `lab-0` | Completed |
 | 1 | VectorSum | `lab-1` | Completed |
 | 2 | Harris | `lab-2` | Completed |
-| 3 | BilinearInterp | `lab-3` | In Progress |
+| 3 | BilinearInterp | `lab-3` | Completed |
+
 ---
